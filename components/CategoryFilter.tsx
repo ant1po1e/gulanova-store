@@ -11,7 +11,7 @@ export default function CategoryFilter({
   active,
   onChange,
 }: CategoryFilterProps) {
-  const options = ["Semua", ...categories];
+  const options = ["All", ...categories];
 
   return (
     <div className="thin-scrollbar -mx-1 flex gap-5 overflow-x-auto px-1 pb-1">
