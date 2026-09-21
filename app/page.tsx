@@ -12,7 +12,7 @@ export default function HomePage() {
   const [items, setItems] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Semua");
+  const [category, setCategory] = useState("All");
   const [selected, setSelected] = useState<CatalogItem | null>(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function HomePage() {
 
   const filtered = useMemo(() => {
     return items.filter((item) => {
-      const matchesCategory = category === "Semua" || item.category === category;
+      const matchesCategory = category === "All" || item.category === category;
       const matchesSearch = item.title
         .toLowerCase()
         .includes(search.trim().toLowerCase());
