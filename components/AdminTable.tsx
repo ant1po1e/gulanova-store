@@ -1,7 +1,7 @@
 "use client";
 
 import { CatalogItem, ItemStatus } from "@/types/item";
-import { formatRupiah } from "@/utils/format";
+import { formatPrice } from "@/utils/format";
 
 interface AdminTableProps {
   items: CatalogItem[];
@@ -34,7 +34,7 @@ export default function AdminTable({
     <div className="thin-scrollbar overflow-x-auto border border-line">
       <table className="w-full min-w-[560px] border-collapse text-sm">
         <thead>
-          <tr className="border-b border-line bg-white/60 text-left text-ink2">
+          <tr className="border-b border-line bg-surface/60 text-left text-ink2">
             <th className="px-4 py-3 font-medium">Title</th>
             <th className="px-4 py-3 font-medium">Price</th>
             <th className="px-4 py-3 font-medium">Category</th>
@@ -46,7 +46,7 @@ export default function AdminTable({
           {items.map((item) => (
             <tr key={item.id} className="border-b border-line last:border-0">
               <td className="px-4 py-3 text-ink">{item.title}</td>
-              <td className="px-4 py-3 text-ink2">{formatRupiah(item.price)}</td>
+              <td className="px-4 py-3 text-ink2">{formatPrice(item.price)}</td>
               <td className="px-4 py-3 text-ink2">{item.category}</td>
               <td className="px-4 py-3">
                 <select
@@ -54,7 +54,7 @@ export default function AdminTable({
                   onChange={(e) =>
                     onStatusChange(item.id, e.target.value as ItemStatus)
                   }
-                  className="border border-line bg-white px-2 py-1 text-sm text-ink outline-none focus:border-ochre"
+                  className="border border-line bg-surface px-2 py-1 text-sm text-ink outline-none focus:border-ochre"
                 >
                   {statusOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>

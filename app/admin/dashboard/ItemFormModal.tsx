@@ -6,7 +6,7 @@ import { CatalogItem, CatalogItemInput, ItemStatus } from "@/types/item";
 import { convertImageToWebp, createPreviewUrl } from "@/utils/imageToWebp";
 
 interface ItemFormModalProps {
-  item: CatalogItem | null; // null = mode tambah, terisi = mode edit
+  item: CatalogItem | null; // null = add mode, populated = edit mode
   categories: string[];
   onClose: () => void;
   onSaved: () => void;
@@ -54,7 +54,7 @@ export default function ItemFormModal({
       setPreviewUrl(createPreviewUrl(webpFile));
     } catch (err) {
       console.error(err);
-      setError("Gagal memproses gambar. Coba gambar lain.");
+      setError("Could not process that image. Try a different file.");
     } finally {
       setConverting(false);
     }
@@ -65,11 +65,11 @@ export default function ItemFormModal({
     setError(null);
 
     if (!title.trim() || !price || !category.trim()) {
-      setError("Judul, harga, dan kategori wajib diisi.");
+      setError("Title, price, and category are required.");
       return;
     }
     if (!imageFile && !item?.image_url) {
-      setError("Gambar item wajib diunggah.");
+      setError("An item image is required.");
       return;
     }
 
@@ -125,7 +125,7 @@ export default function ItemFormModal({
       onSaved();
     } catch (err) {
       console.error(err);
-      setError("Gagal menyimpan item. Silakan coba lagi.");
+      setError("Could not save the item. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -133,28 +133,28 @@ export default function ItemFormModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       onClick={onClose}
     >
       <div
-        className="thin-scrollbar max-h-full w-full max-w-lg overflow-y-auto bg-paper p-6"
+        className="thin-scrollbar max-h-full w-full max-w-lg overflow-y-auto bg-surface p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="font-display text-xl text-ink">
-          {isEdit ? "Edit Item" : "Tambah Item"}
+          {isEdit ? "Edit Item" : "Add Item"}
         </h2>
 
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm text-ink2">Gambar</span>
+            <span className="text-sm text-ink2">Image</span>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="text-sm text-ink2 file:mr-3 file:border file:border-line file:bg-white file:px-3 file:py-1.5 file:text-sm file:text-ink"
+              className="text-sm text-ink2 file:mr-3 file:border file:border-line file:bg-surface file:px-3 file:py-1.5 file:text-sm file:text-ink"
             />
             {converting && (
-              <span className="text-xs text-ink2/70">Mengonversi ke WEBP...</span>
+              <span className="text-xs text-ink2/70">Converting to WEBP...</span>
             )}
             {previewUrl && (
               <div className="relative mt-1 aspect-[4/5] w-32 overflow-hidden border border-line">
@@ -169,37 +169,37 @@ export default function ItemFormModal({
           </label>
 
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm text-ink2">Judul</span>
+            <span className="text-sm text-ink2">Title</span>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+              className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             />
           </label>
 
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm text-ink2">Harga (Rp)</span>
+            <span className="text-sm text-ink2">Price (IDR)</span>
             <input
               type="number"
               required
               min={0}
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+              className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             />
           </label>
 
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm text-ink2">Kategori</span>
+            <span className="text-sm text-ink2">Category</span>
             <input
               type="text"
               required
               list="category-suggestions"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+              className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             />
             <datalist id="category-suggestions">
               {categories.map((c) => (
@@ -209,13 +209,13 @@ export default function ItemFormModal({
           </label>
 
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm text-ink2">Link (opsional)</span>
+            <span className="text-sm text-ink2">Link (optional)</span>
             <input
               type="url"
               value={link ?? ""}
               onChange={(e) => setLink(e.target.value)}
               placeholder="https://..."
-              className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+              className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             />
           </label>
 
@@ -224,11 +224,11 @@ export default function ItemFormModal({
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as ItemStatus)}
-              className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+              className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             >
-              <option value="available">Tersedia</option>
-              <option value="booked">Dibooking</option>
-              <option value="sold">Terjual</option>
+              <option value="available">Available</option>
+              <option value="booked">Booked</option>
+              <option value="sold">Sold</option>
             </select>
           </label>
 
@@ -240,14 +240,14 @@ export default function ItemFormModal({
               onClick={onClose}
               className="px-4 py-2 text-sm text-ink2 hover:text-ink"
             >
-              Batal
+              Cancel
             </button>
             <button
               type="submit"
               disabled={saving || converting}
               className="bg-ink px-5 py-2 text-sm text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
             >
-              {saving ? "Menyimpan..." : "Simpan"}
+              {saving ? "Saving..." : "Save"}
             </button>
           </div>
         </form>

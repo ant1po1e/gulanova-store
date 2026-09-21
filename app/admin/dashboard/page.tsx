@@ -46,7 +46,7 @@ export default function DashboardPage() {
       .update({ status })
       .eq("id", id);
     if (error) {
-      // rollback kalau gagal
+      // roll back on failure
       loadItems();
     }
   }
@@ -78,7 +78,7 @@ export default function DashboardPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="font-display text-xl text-ink">Item List</h1>
+        <h1 className="font-display text-xl text-ink">Items</h1>
         <button
           onClick={openAddForm}
           className="bg-ink px-4 py-2 text-sm text-paper transition-opacity hover:opacity-90"
@@ -89,7 +89,7 @@ export default function DashboardPage() {
 
       <div className="mt-6">
         {loading ? (
-          <p className="text-sm text-ink2/70">Loading data...</p>
+          <p className="text-sm text-ink2/70">Loading...</p>
         ) : (
           <AdminTable
             items={items}
@@ -114,30 +114,30 @@ export default function DashboardPage() {
 
       {deletingItem && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
           onClick={() => setDeletingItem(null)}
         >
           <div
-            className="w-full max-w-sm bg-paper p-6"
+            className="w-full max-w-sm bg-surface p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-display text-lg text-ink">Hapus item ini?</h2>
+            <h2 className="font-display text-lg text-ink">Delete this item?</h2>
             <p className="mt-2 text-sm text-ink2">
-              &quot;{deletingItem.title}&quot; akan dihapus permanen dan tidak
-              bisa dikembalikan.
+              &quot;{deletingItem.title}&quot; will be permanently deleted and
+              cannot be recovered.
             </p>
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setDeletingItem(null)}
                 className="px-4 py-2 text-sm text-ink2 hover:text-ink"
               >
-                Batal
+                Cancel
               </button>
               <button
                 onClick={handleDeleteConfirmed}
                 className="bg-rose px-4 py-2 text-sm text-paper hover:opacity-90"
               >
-                Hapus
+                Delete
               </button>
             </div>
           </div>

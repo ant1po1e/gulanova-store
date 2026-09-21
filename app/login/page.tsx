@@ -26,7 +26,7 @@ function LoginForm() {
     setLoading(false);
 
     if (signInError) {
-      setError("Incorrect email or password.");
+      setError("Invalid email or password.");
       return;
     }
 
@@ -50,7 +50,7 @@ function LoginForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+            className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             autoComplete="email"
           />
         </label>
@@ -62,7 +62,7 @@ function LoginForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
+            className="border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-ochre"
             autoComplete="current-password"
           />
         </label>
@@ -74,7 +74,7 @@ function LoginForm() {
           disabled={loading}
           className="mt-2 bg-ink px-5 py-2.5 text-sm text-paper transition-opacity hover:opacity-90 disabled:opacity-50"
         >
-          {loading ? "Processing..." : "Log In"}
+          {loading ? "Signing in..." : "Sign in"}
         </button>
       </form>
     </div>

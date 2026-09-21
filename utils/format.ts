@@ -1,5 +1,5 @@
-export function formatRupiah(value: number): string {
-  return new Intl.NumberFormat("id-ID", {
+export function formatPrice(value: number): string {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,

@@ -4,25 +4,48 @@
 
 :root {
   color-scheme: light;
+  --color-paper: 250 249 244;
+  --color-surface: 255 255 255;
+  --color-ink: 28 27 25;
+  --color-ink2: 74 71 64;
+  --color-line: 228 225 214;
+  --color-ochre: 184 134 59;
+  --color-ochre-dark: 143 100 39;
+  --color-sage: 95 110 82;
+  --color-rose: 166 72 74;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-paper: 19 18 16;
+  --color-surface: 29 28 25;
+  --color-ink: 240 238 231;
+  --color-ink2: 176 172 160;
+  --color-line: 53 50 44;
+  --color-ochre: 205 154 80;
+  --color-ochre-dark: 227 176 101;
+  --color-sage: 140 158 124;
+  --color-rose: 216 124 126;
 }
 
 body {
-  background-color: #faf9f4;
-  color: #1c1b19;
+  background-color: rgb(var(--color-paper));
+  color: rgb(var(--color-ink));
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 ::selection {
-  background-color: #b8863b;
-  color: #faf9f4;
+  background-color: rgb(var(--color-ochre));
+  color: rgb(var(--color-paper));
 }
 
-/* Focus visibility untuk aksesibilitas keyboard */
+/* Keyboard focus visibility */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #b8863b;
+  outline: 2px solid rgb(var(--color-ochre));
   outline-offset: 2px;
 }
 
@@ -34,12 +57,11 @@ textarea:focus-visible {
   }
 }
 
-/* Scrollbar tipis khusus modal/gallery */
 .thin-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #e4e1d6;
+  background-color: rgb(var(--color-line));
   border-radius: 4px;
 }

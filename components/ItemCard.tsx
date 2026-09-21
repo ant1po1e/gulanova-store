@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { CatalogItem } from "@/types/item";
-import { formatRupiah } from "@/utils/format";
+import { formatPrice } from "@/utils/format";
 
 interface ItemCardProps {
   item: CatalogItem;
-  onClick: () => void;
 }
 
 const statusLabel: Record<string, string> = {
@@ -14,15 +14,16 @@ const statusLabel: Record<string, string> = {
   sold: "Sold",
 };
 
-export default function ItemCard({ item, onClick }: ItemCardProps) {
+export default function ItemCard({ item }: ItemCardProps) {
   const isUnavailable = item.status !== "available";
 
   return (
-    <button
-      onClick={onClick}
+    <Link
+      href={`/item/${item.id}`}
+      scroll={false}
       className="group mb-5 block w-full break-inside-avoid text-left"
     >
-      <div className="relative overflow-hidden border border-line bg-white">
+      <div className="relative overflow-hidden border border-line bg-surface transition-shadow duration-200 group-hover:shadow-lg group-hover:shadow-ink/5">
         <div className="relative aspect-[4/5] w-full">
           <Image
             src={item.image_url}
@@ -35,7 +36,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           />
         </div>
         {isUnavailable && (
-          <span className="absolute left-2 top-2 border border-ink/10 bg-paper/90 px-2 py-0.5 text-xs text-ink2">
+          <span className="absolute left-2 top-2 border border-line bg-paper/90 px-2 py-0.5 text-xs text-ink2">
             {statusLabel[item.status]}
           </span>
         )}
@@ -45,7 +46,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           {item.title}
         </h3>
       </div>
-      <p className="mt-0.5 text-sm text-ink2">{formatRupiah(item.price)}</p>
-    </button>
+      <p className="mt-0.5 text-sm text-ink2">{formatPrice(item.price)}</p>
+    </Link>
   );
 }

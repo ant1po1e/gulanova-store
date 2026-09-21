@@ -12,8 +12,8 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Find an item.."
-        aria-label="Find catalog item"
+        placeholder="Search items..."
+        aria-label="Search catalog items"
         className="w-full border-b border-line bg-transparent py-2 pr-8 text-sm text-ink placeholder:text-ink2/50 focus:border-ochre outline-none transition-colors"
       />
       <svg

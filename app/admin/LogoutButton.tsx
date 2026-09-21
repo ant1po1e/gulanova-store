@@ -18,7 +18,7 @@ export default function LogoutButton() {
       onClick={handleLogout}
       className="text-sm text-ink2 underline decoration-line underline-offset-4 hover:text-ink"
     >
-      Keluar
+      Sign out
     </button>
   );
 }
