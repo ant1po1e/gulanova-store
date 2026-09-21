@@ -10,8 +10,8 @@ interface ItemCardProps {
 }
 
 const statusLabel: Record<string, string> = {
-  booked: "Dibooking",
-  sold: "Terjual",
+  booked: "Booked",
+  sold: "Sold",
 };
 
 export default function ItemCard({ item, onClick }: ItemCardProps) {
